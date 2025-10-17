@@ -1,1 +1,2 @@
-# pragmatic-gaming-site
+# Gaming Site
+Simple pragmatic games website
