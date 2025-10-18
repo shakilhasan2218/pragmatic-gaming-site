@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pragmatic Gaming - Premium Casino Games</title>
+    <title>Baji Live - Premium Gaming Experience</title>
     <style>
-        /* CSS Styles */
+        /* Baji.live Color Scheme */
         :root {
-            --primary-red: #dc2626;
-            --dark-bg: #0f0f0f;
-            --gold: #fbbf24;
+            --primary-red: #e74c3c;
+            --dark-bg: #0a0a0a;
+            --gold: #f1c40f;
             --text-light: #ffffff;
             --card-bg: #1a1a1a;
+            --accent-blue: #3498db;
+            --green: #2ecc71;
         }
 
         * {
@@ -21,19 +23,21 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--dark-bg);
             color: var(--text-light);
             line-height: 1.6;
         }
 
+        /* Navigation - Baji Style */
         .navbar {
-            background: rgba(15, 15, 15, 0.95);
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .nav-container {
@@ -45,153 +49,321 @@
             padding: 0 2rem;
         }
 
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .nav-logo h2 {
-            color: var(--primary-red);
-            font-size: 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-link {
-            color: var(--text-light);
+            color: white;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 5px;
         }
 
         .nav-link:hover {
-            color: var(--gold);
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
 
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a0f0f 100%);
-            height: 80vh;
+            height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            margin-top: 60px;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(231,76,60,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
         }
 
         .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--gold), var(--primary-red));
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--gold), #e74c3c, var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(231,76,60,0.5);
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(231,76,60,0.5); }
+            to { text-shadow: 0 0 30px rgba(241,196,15,0.7); }
         }
 
         .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button {
-            background: var(--primary-red);
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 5px;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(231,76,60,0.4);
         }
 
         .cta-button:hover {
-            background: var(--gold);
-            transform: translateY(-2px);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(231,76,60,0.6);
         }
 
+        /* Games Section */
         .games-section {
-            padding: 4rem 0;
+            padding: 5rem 0;
             background: var(--dark-bg);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 3rem;
             color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            transform: scale(1.05);
+        }
+
+        .category-tab:hover {
+            background: #34495e;
+        }
+
+        /* Games Grid */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .game-card {
-            background: var(--card-bg);
-            border-radius: 10px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s;
-            border: 1px solid #333;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .game-card::before {
+            content: 'HOT';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
         }
 
         .game-image {
             width: 100%;
-            height: 200px;
-            background: #333;
+            height: 220px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
+            color: var(--gold);
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 0%, rgba(241,196,15,0.1) 100%);
         }
 
         .game-info {
-            padding: 1.5rem;
+            padding: 2rem;
+            text-align: center;
         }
 
         .game-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: white;
+            font-weight: bold;
         }
 
         .game-type {
             color: var(--gold);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         .play-button {
-            background: var(--primary-red);
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            border-radius: 10px;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
-            font-size: 1rem;
+            transition: all 0.3s;
             font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(46,204,113,0.3);
         }
 
         .play-button:hover {
-            background: var(--gold);
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46,204,113,0.5);
+        }
+
+        /* Game Launch Modal */
+        .game-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 3px solid var(--gold);
+        }
+
+        .modal-title {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+
+        .btn-close {
+            background: #e74c3c;
+            color: white;
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
             }
             
             .nav-menu {
@@ -199,12 +371,12 @@
             }
             
             .hero-content h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             .games-grid {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 1.5rem;
             }
             
             .container {
@@ -212,8 +384,12 @@
             }
             
             .game-image {
-                height: 150px;
-                font-size: 1rem;
+                height: 180px;
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -223,12 +399,13 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>🎰 PRAGMATIC GAMES</h2>
+                <h2>🎰 BAJI LIVE GAMES</h2>
             </div>
             <div class="nav-menu">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#games" class="nav-link">Games</a>
-                <a href="#about" class="nav-link">About</a>
+                <a href="#slots" class="nav-link">Slots</a>
+                <a href="#live" class="nav-link">Live Casino</a>
             </div>
         </div>
     </nav>
@@ -236,74 +413,147 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>WELCOME TO PREMIUM GAMING</h1>
-            <p>Experience the thrill of Pragmatic Play's best games</p>
-            <button class="cta-button" onclick="scrollToGames()">PLAY NOW</button>
+            <h1>WELCOME TO BAJI LIVE</h1>
+            <p>Experience premium gaming with 100+ exciting games. Play now and win big!</p>
+            <button class="cta-button" onclick="scrollToGames()">🎮 START PLAYING</button>
         </div>
     </section>
 
     <!-- Games Section -->
     <section class="games-section" id="games">
         <div class="container">
-            <h2 class="section-title">🎮 POPULAR GAMES</h2>
+            <h2 class="section-title">🔥 POPULAR GAMES</h2>
+            
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="filterGames('all')">All Games</button>
+                <button class="category-tab" onclick="filterGames('slot')">Slots</button>
+                <button class="category-tab" onclick="filterGames('table')">Table Games</button>
+                <button class="category-tab" onclick="filterGames('live')">Live Casino</button>
+            </div>
+
+            <!-- Games Grid -->
             <div class="games-grid" id="gamesGrid">
-                <!-- Games will be loaded here by JavaScript -->
+                <!-- Games will be loaded here -->
             </div>
         </div>
     </section>
 
+    <!-- Game Launch Modal -->
+    <div class="game-modal" id="gameModal">
+        <div class="modal-content">
+            <h2 class="modal-title" id="modalGameName">Game Title</h2>
+            <p>This game will open in a new window. Ready to play?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn btn-play" onclick="launchSelectedGame()">🎯 PLAY NOW</button>
+                <button class="modal-btn btn-close" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Games Data
+        // Enhanced Games Data - Baji Live Style
         const games = [
+            // Slot Games
             {
                 id: "1",
-                name: "GATES OF OLYMPUS",
+                name: "SWEET BONANZA",
                 type: "SLOT GAME",
-                demoUrl: "https://demogames.pragmaticplay.net/olympus"
+                category: "slot",
+                demoUrl: "https://www.pragmaticplay.com/en/games/sweet-bonanza/",
+                provider: "Pragmatic Play"
             },
             {
                 id: "2", 
-                name: "SWEET BONANZA",
+                name: "GATES OF OLYMPUS",
                 type: "SLOT GAME", 
-                demoUrl: "https://demogames.pragmaticplay.net/bonanza"
+                category: "slot",
+                demoUrl: "https://www.pragmaticplay.com/en/gates-of-olympus/",
+                provider: "Pragmatic Play"
             },
             {
                 id: "3",
-                name: "BLACKJACK",
-                type: "TABLE GAME",
-                demoUrl: "https://demogames.pragmaticplay.net/blackjack"
+                name: "WOLF GOLD",
+                type: "SLOT GAME",
+                category: "slot", 
+                demoUrl: "https://www.pragmaticplay.com/en/wolf-gold/",
+                provider: "Pragmatic Play"
             },
             {
                 id: "4",
-                name: "ROULETTE", 
-                type: "TABLE GAME",
-                demoUrl: "https://demogames.pragmaticplay.net/roulette"
+                name: "THE DOG HOUSE", 
+                type: "SLOT GAME",
+                category: "slot",
+                demoUrl: "https://www.pragmaticplay.com/en/the-dog-house/",
+                provider: "Pragmatic Play"
             },
+            // Table Games
             {
                 id: "5",
-                name: "WOLF GOLD",
-                type: "SLOT GAME",
-                demoUrl: "https://demogames.pragmaticplay.net/wolfgold"
+                name: "BLACKJACK",
+                type: "TABLE GAME",
+                category: "table",
+                demoUrl: "https://www.pragmaticplay.com/en/blackjack/",
+                provider: "Pragmatic Play"
             },
             {
                 id: "6", 
-                name: "HOT SAFARI",
-                type: "SLOT GAME",
-                demoUrl: "https://demogames.pragmaticplay.net/safari"
+                name: "ROULETTE",
+                type: "TABLE GAME",
+                category: "table",
+                demoUrl: "https://www.pragmaticplay.com/en/roulette/",
+                provider: "Pragmatic Play"
+            },
+            {
+                id: "7",
+                name: "BACCARAT",
+                type: "TABLE GAME",
+                category: "table",
+                demoUrl: "https://www.pragmaticplay.com/en/baccarat/",
+                provider: "Pragmatic Play"
+            },
+            // Live Casino
+            {
+                id: "8",
+                name: "LIVE BLACKJACK",
+                type: "LIVE CASINO",
+                category: "live", 
+                demoUrl: "https://www.pragmaticplay.com/en/live-casino/",
+                provider: "Pragmatic Play"
+            },
+            {
+                id: "9",
+                name: "LIVE ROULETTE",
+                type: "LIVE CASINO",
+                category: "live",
+                demoUrl: "https://www.pragmaticplay.com/en/live-casino/", 
+                provider: "Pragmatic Play"
+            },
+            {
+                id: "10",
+                name: "MEGA ROULETTE",
+                type: "LIVE CASINO",
+                category: "live",
+                demoUrl: "https://www.pragmaticplay.com/en/live-casino/",
+                provider: "Pragmatic Play"
             }
         ];
 
+        let selectedGame = null;
+
         // Load Games when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            loadGames();
+            loadGames('all');
         });
 
         // Load Games to Grid
-        function loadGames() {
+        function loadGames(category = 'all') {
             const gamesGrid = document.getElementById('gamesGrid');
             gamesGrid.innerHTML = '';
             
-            games.forEach(game => {
+            const filteredGames = category === 'all' ? games : games.filter(game => game.category === category);
+            
+            filteredGames.forEach(game => {
                 const gameCard = document.createElement('div');
                 gameCard.className = 'game-card';
                 gameCard.innerHTML = `
@@ -313,24 +563,51 @@
                     <div class="game-info">
                         <h3 class="game-title">${game.name}</h3>
                         <p class="game-type">${game.type}</p>
-                        <button class="play-button" onclick="launchGame('${game.id}')">
+                        <button class="play-button" onclick="openGameModal('${game.id}')">
                             🎯 PLAY NOW
                         </button>
                     </div>
                 `;
                 gamesGrid.appendChild(gameCard);
             });
+
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
         }
 
-        // Launch Game
-        function launchGame(gameId) {
-            const game = games.find(g => g.id === gameId);
-            if (game) {
+        // Filter Games by Category
+        function filterGames(category) {
+            loadGames(category);
+        }
+
+        // Open Game Modal
+        function openGameModal(gameId) {
+            selectedGame = games.find(g => g.id === gameId);
+            if (selectedGame) {
+                document.getElementById('modalGameName').textContent = selectedGame.name;
+                document.getElementById('gameModal').style.display = 'flex';
+            }
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('gameModal').style.display = 'none';
+            selectedGame = null;
+        }
+
+        // Launch Selected Game
+        function launchSelectedGame() {
+            if (selectedGame) {
                 // Open game in new tab
-                window.open(game.demoUrl, '_blank');
+                window.open(selectedGame.demoUrl, '_blank', 'width=1200,height=800');
                 
-                // Show notification
-                alert(`🎮 Launching ${game.name}...\n\nGame will open in new tab!`);
+                // Show success message
+                alert(`🎮 Launching ${selectedGame.name}...\n\nGame is opening in new window!`);
+                
+                closeModal();
             }
         }
 
@@ -339,6 +616,14 @@
             document.getElementById('games').scrollIntoView({
                 behavior: 'smooth'
             });
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('gameModal');
+            if (event.target === modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
