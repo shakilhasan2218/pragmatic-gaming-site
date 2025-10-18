@@ -4,9 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pragmatic Gaming - Premium Casino Games</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-red: #dc2626;
+            --dark-bg: #0f0f0f;
+            --gold: #fbbf24;
+            --text-light: #ffffff;
+            --card-bg: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(15, 15, 15, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo h2 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a0f0f 100%);
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .games-section {
+            padding: 4rem 0;
+            background: var(--dark-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--gold);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid #333;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .game-type {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .play-button {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .play-button:hover {
+            background: var(--gold);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .game-image {
+                height: 150px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -20,7 +233,8 @@
         </div>
     </nav>
 
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <div class="hero-content">
             <h1>WELCOME TO PREMIUM GAMING</h1>
             <p>Experience the thrill of Pragmatic Play's best games</p>
@@ -28,14 +242,104 @@
         </div>
     </section>
 
-    <section class="games-section">
+    <!-- Games Section -->
+    <section class="games-section" id="games">
         <div class="container">
-            <h2 class="section-title">POPULAR GAMES</h2>
-            <div class="games-grid" id="gamesGrid"></div>
+            <h2 class="section-title">🎮 POPULAR GAMES</h2>
+            <div class="games-grid" id="gamesGrid">
+                <!-- Games will be loaded here by JavaScript -->
+            </div>
         </div>
     </section>
 
-    <script src="js/games.js"></script>
-    <script src="js/app.js"></script>
+    <script>
+        // Games Data
+        const games = [
+            {
+                id: "1",
+                name: "GATES OF OLYMPUS",
+                type: "SLOT GAME",
+                demoUrl: "https://demogames.pragmaticplay.net/olympus"
+            },
+            {
+                id: "2", 
+                name: "SWEET BONANZA",
+                type: "SLOT GAME", 
+                demoUrl: "https://demogames.pragmaticplay.net/bonanza"
+            },
+            {
+                id: "3",
+                name: "BLACKJACK",
+                type: "TABLE GAME",
+                demoUrl: "https://demogames.pragmaticplay.net/blackjack"
+            },
+            {
+                id: "4",
+                name: "ROULETTE", 
+                type: "TABLE GAME",
+                demoUrl: "https://demogames.pragmaticplay.net/roulette"
+            },
+            {
+                id: "5",
+                name: "WOLF GOLD",
+                type: "SLOT GAME",
+                demoUrl: "https://demogames.pragmaticplay.net/wolfgold"
+            },
+            {
+                id: "6", 
+                name: "HOT SAFARI",
+                type: "SLOT GAME",
+                demoUrl: "https://demogames.pragmaticplay.net/safari"
+            }
+        ];
+
+        // Load Games when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGames();
+        });
+
+        // Load Games to Grid
+        function loadGames() {
+            const gamesGrid = document.getElementById('gamesGrid');
+            gamesGrid.innerHTML = '';
+            
+            games.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.innerHTML = `
+                    <div class="game-image">
+                        ${game.name}
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">${game.name}</h3>
+                        <p class="game-type">${game.type}</p>
+                        <button class="play-button" onclick="launchGame('${game.id}')">
+                            🎯 PLAY NOW
+                        </button>
+                    </div>
+                `;
+                gamesGrid.appendChild(gameCard);
+            });
+        }
+
+        // Launch Game
+        function launchGame(gameId) {
+            const game = games.find(g => g.id === gameId);
+            if (game) {
+                // Open game in new tab
+                window.open(game.demoUrl, '_blank');
+                
+                // Show notification
+                alert(`🎮 Launching ${game.name}...\n\nGame will open in new tab!`);
+            }
+        }
+
+        // Scroll to Games
+        function scrollToGames() {
+            document.getElementById('games').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
