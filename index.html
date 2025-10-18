@@ -1,822 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XGaming - Ultimate Gaming Platform</title>
-    <style>
-        /* XGaming Color Scheme */
-        :root {
-            --primary-blue: #3498db;
-            --primary-purple: #9b59b6;
-            --dark-bg: #0f0f23;
-            --darker-bg: #0a0a1a;
-            --text-light: #ffffff;
-            --accent-green: #2ecc71;
-            --accent-orange: #e67e22;
-            --card-bg: #1a1a2e;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        .navbar {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(52, 152, 219, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-logo h2 {
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        /* Search Bar */
-        .search-container {
-            position: relative;
-        }
-
-        .search-bar {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.2);
-            padding: 10px 45px 10px 20px;
-            border-radius: 25px;
-            color: white;
-            width: 300px;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .search-bar::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .search-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        /* Auth Buttons */
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-login, .btn-register {
-            padding: 10px 25px;
-            border: 2px solid white;
-            border-radius: 25px;
-            background: transparent;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-register {
-            background: white;
-            color: var(--primary-blue);
-        }
-
-        .btn-login:hover {
-            background: white;
-            color: var(--primary-blue);
-        }
-
-        .btn-register:hover {
-            background: transparent;
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--darker-bg) 0%, #1a1a2e 100%);
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple), var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 0 20px rgba(52, 152, 219, 0.5); }
-            50% { text-shadow: 0 0 30px rgba(155, 89, 182, 0.7); }
-            100% { text-shadow: 0 0 40px rgba(46, 204, 113, 0.5); }
-        }
-
-        /* Games Section */
-        .games-section {
-            padding: 5rem 0;
-            background: var(--darker-bg);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            color: var(--primary-blue);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Providers Filter */
-        .providers-filter {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .provider-btn {
-            background: var(--card-bg);
-            color: white;
-            border: 2px solid transparent;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .provider-btn.active {
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            border-color: var(--accent-green);
-            transform: scale(1.05);
-        }
-
-        /* Games Grid */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .game-card {
-            background: linear-gradient(135deg, var(--card-bg) 0%, #16213e 100%);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--primary-blue);
-            box-shadow: 0 25px 50px rgba(52, 152, 219, 0.3);
-        }
-
-        .game-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--accent-orange);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            z-index: 2;
-        }
-
-        .favorite-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(0,0,0,0.7);
-            border: none;
-            color: white;
-            padding: 8px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 2;
-        }
-
-        .favorite-btn.active {
-            color: #e74c3c;
-        }
-
-        .game-image {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            font-weight: bold;
-            font-size: 1.3rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .game-info {
-            padding: 2rem;
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-        }
-
-        .game-title {
-            font-size: 1.4rem;
-            color: white;
-            font-weight: bold;
-        }
-
-        .game-rating {
-            background: var(--accent-orange);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .game-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        .play-button {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #27ae60 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 12px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .play-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
-        }
-
-        /* Auth Modal */
-        .auth-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .auth-content {
-            background: linear-gradient(135deg, var(--card-bg) 0%, #16213e 100%);
-            padding: 3rem;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            border: 3px solid var(--primary-blue);
-        }
-
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 15px;
-            background: transparent;
-            border: 2px solid var(--primary-blue);
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .auth-tab.active {
-            background: var(--primary-blue);
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .auth-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .auth-submit:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .search-bar {
-                width: 250px;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-            
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 0 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XGaming - Ultimate Gaming Platform</title>
+  <style>
+    /* (Same CSS as you sent, kept intact for look) */
+    :root {
+      --primary-blue: #3498db;
+      --primary-purple: #9b59b6;
+      --dark-bg: #0f0f23;
+      --darker-bg: #0a0a1a;
+      --text-light: #ffffff;
+      --accent-green: #2ecc71;
+      --accent-orange: #e67e22;
+      --card-bg: #1a1a2e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(52, 152, 219, 0.3);
+    }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 2rem;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo h2 { color: white; font-size: 2rem; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .nav-actions { display: flex; align-items: center; gap: 1.5rem; }
+    .search-container { position: relative; }
+    .search-bar {
+      background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2);
+      padding: 10px 45px 10px 20px; border-radius: 25px; color: white; width: 300px; font-size: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    .search-bar::placeholder { color: rgba(255,255,255,0.7); }
+    .search-btn {
+      position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;
+    }
+    .auth-buttons { display: flex; gap: 1rem; }
+    .btn-login, .btn-register {
+      padding: 10px 25px; border: 2px solid white; border-radius: 25px; background: transparent; color: white;
+      cursor: pointer; font-weight: 600; transition: all 0.3s;
+    }
+    .btn-register { background: white; color: var(--primary-blue); }
+    .btn-login:hover { background: white; color: var(--primary-blue); }
+    .btn-register:hover { background: transparent; color: white; }
+    .hero {
+      background: linear-gradient(135deg, var(--darker-bg) 0%, #1a1a2e 100%);
+      height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center;
+      margin-top: 80px; position: relative; overflow: hidden;
+    }
+    .hero-content h1 {
+      font-size: 4.5rem; margin-bottom: 1.5rem;
+      background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple), var(--accent-green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 20px rgba(52, 152, 219, 0.5); }
+      50% { text-shadow: 0 0 30px rgba(155, 89, 182, 0.7); }
+      100% { text-shadow: 0 0 40px rgba(46, 204, 113, 0.5); }
+    }
+    .games-section { padding: 5rem 0; background: var(--darker-bg); }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+    .section-title { text-align: center; font-size: 3rem; margin-bottom: 3rem; color: var(--primary-blue); text-transform: uppercase; letter-spacing: 2px; }
+    .providers-filter { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .provider-btn {
+      background: var(--card-bg); color: white; border: 2px solid transparent; padding: 12px 25px; border-radius: 25px;
+      cursor: pointer; transition: all 0.3s; font-weight: 600;
+    }
+    .provider-btn.active {
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); border-color: var(--accent-green); transform: scale(1.05);
+    }
+    .games-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;
+    }
+    .game-card {
+      background: linear-gradient(135deg, var(--card-bg) 0%, #16213e 100%); border-radius: 20px; overflow: hidden;
+      transition: all 0.3s; border: 2px solid transparent; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    .game-card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--primary-blue); box-shadow: 0 25px 50px rgba(52, 152, 219, 0.3); }
+    .game-badge { position: absolute; top: 15px; right: 15px; background: var(--accent-orange); color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; z-index: 2; }
+    .favorite-btn {
+      position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7); border: none; color: white; padding: 8px; border-radius: 50%; cursor: pointer; transition: all 0.3s; z-index: 2;
+    }
+    .favorite-btn.active { color: #e74c3c; }
+    .game-image {
+      width: 100%; height: 220px; background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); display: flex; align-items: center; justify-content: center; color: var(--text-light); font-weight: bold; font-size: 1.3rem; text-align: center; position: relative;
+    }
+    .game-info { padding: 2rem; }
+    .game-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem; }
+    .game-title { font-size: 1.4rem; color: white; font-weight: bold; }
+    .game-rating { background: var(--accent-orange); color: white; padding: 5px 10px; border-radius: 10px; font-size: 0.9rem; font-weight: bold; }
+    .game-meta { display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.9rem; color: #aaa; }
+    .play-button {
+      background: linear-gradient(135deg, var(--accent-green) 0%, #27ae60 100%); color: white; border: none; padding: 15px 30px; border-radius: 12px; cursor: pointer; width: 100%; transition: all 0.3s; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .play-button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4); }
+    .auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; }
+    .auth-content { background: linear-gradient(135deg, var(--card-bg) 0%, #16213e 100%); padding: 3rem; border-radius: 20px; width: 90%; max-width: 500px; border: 3px solid var(--primary-blue); }
+    .auth-tabs { display: flex; margin-bottom: 2rem; gap: 1rem; }
+    .auth-tab { flex: 1; padding: 15px; background: transparent; border: 2px solid var(--primary-blue); color: white; border-radius: 10px; cursor: pointer; font-weight: bold; transition: all 0.3s; }
+    .auth-tab.active { background: var(--primary-blue); }
+    .auth-form { display: none; }
+    .auth-form.active { display: block; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group input { width: 100%; padding: 15px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); border-radius: 10px; color: white; font-size: 1rem; }
+    .form-group input::placeholder { color: rgba(255,255,255,0.6); }
+    .auth-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); border: none; border-radius: 10px; color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+    .auth-submit:hover { transform: translateY(-2px); }
+    @media (max-width: 768px) {
+      .nav-container { padding: 0 1rem; flex-direction: column; gap: 1rem; }
+      .search-bar { width: 250px; }
+      .hero-content h1 { font-size: 2.8rem; }
+      .games-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 1rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>🎮 XGaming</h2>
-            </div>
-            
-            <div class="nav-actions">
-                <!-- Search Bar -->
-                <div class="search-container">
-                    <input type="text" class="search-bar" placeholder="Search games..." id="searchInput">
-                    <button class="search-btn">🔍</button>
-                </div>
-                
-                <!-- Auth Buttons -->
-                <div class="auth-buttons">
-                    <button class="btn-login" onclick="openAuthModal('login')">Login</button>
-                    <button class="btn-register" onclick="openAuthModal('register')">Register</button>
-                </div>
-            </div>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <h2>🎮 XGaming</h2>
+      </div>
+      <div class="nav-actions">
+        <!-- Search Bar -->
+        <div class="search-container">
+          <input type="text" class="search-bar" placeholder="Search games..." id="searchInput" />
+          <button class="search-btn" id="searchBtn">🔍</button>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>WELCOME TO XGAMING</h1>
-            <p style="font-size: 1.4rem; margin-bottom: 2rem;">The Ultimate Gaming Experience with 1000+ Games</p>
-            <button class="cta-button" onclick="scrollToGames()">🚀 EXPLORE GAMES</button>
+        <!-- Auth Buttons -->
+        <div class="auth-buttons" id="authButtons">
+          <button class="btn-login" onclick="openAuthModal('login')">Login</button>
+          <button class="btn-register" onclick="openAuthModal('register')">Register</button>
         </div>
-    </section>
-
-    <!-- Games Section -->
-    <section class="games-section" id="games">
-        <div class="container">
-            <h2 class="section-title">🎯 FEATURED GAMES</h2>
-            
-            <!-- Providers Filter -->
-            <div class="providers-filter">
-                <button class="provider-btn active" onclick="filterByProvider('all')">All Providers</button>
-                <button class="provider-btn" onclick="filterByProvider('pragmatic')">Pragmatic Play</button>
-                <button class="provider-btn" onclick="filterByProvider('evolution')">Evolution</button>
-                <button class="provider-btn" onclick="filterByProvider('netent')">NetEnt</button>
-                <button class="provider-btn" onclick="filterByProvider('playtech')">Playtech</button>
-                <button class="provider-btn" onclick="filterByProvider('microgaming')">Microgaming</button>
-            </div>
-
-            <!-- Games Grid -->
-            <div class="games-grid" id="gamesGrid">
-                <!-- Games will be loaded here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Auth Modal -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-content">
-            <div class="auth-tabs">
-                <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-                <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
-            </div>
-            
-            <div class="auth-form active" id="loginForm">
-                <div class="form-group">
-                    <input type="email" placeholder="Email" id="loginEmail">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" id="loginPassword">
-                </div>
-                <button class="auth-submit" onclick="login()">Login</button>
-            </div>
-            
-            <div class="auth-form" id="registerForm">
-                <div class="form-group">
-                    <input type="text" placeholder="Full Name" id="registerName">
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Email" id="registerEmail">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" id="registerPassword">
-                </div>
-                <button class="auth-submit" onclick="register()">Create Account</button>
-            </div>
-        </div>
+      </div>
     </div>
+  </nav>
 
-    <script>
-        // Enhanced Games Data with Multiple Providers
-        const games = [
-            // Pragmatic Play Games
-            {
-                id: "1",
-                name: "SWEET BONANZA",
-                type: "SLOT",
-                provider: "pragmatic",
-                rating: 4.8,
-                votes: 1250,
-                isFavorite: false,
-                demoUrl: "https://www.pragmaticplay.com/en/games/sweet-bonanza/"
-            },
-            {
-                id: "2", 
-                name: "GATES OF OLYMPUS",
-                type: "SLOT", 
-                provider: "pragmatic",
-                rating: 4.9,
-                votes: 980,
-                isFavorite: false,
-                demoUrl: "https://www.pragmaticplay.com/en/gates-of-olympus/"
-            },
-            // Evolution Games
-            {
-                id: "3",
-                name: "LIGHTNING ROULETTE",
-                type: "LIVE CASINO",
-                provider: "evolution", 
-                rating: 4.7,
-                votes: 890,
-                isFavorite: false,
-                demoUrl: "https://www.evolution.com/games/lightning-roulette/"
-            },
-            {
-                id: "4",
-                name: "MONOPOLY LIVE", 
-                type: "LIVE GAME SHOW",
-                provider: "evolution",
-                rating: 4.6,
-                votes: 760,
-                isFavorite: false,
-                demoUrl: "https://www.evolution.com/games/monopoly-live/"
-            },
-            // NetEnt Games
-            {
-                id: "5",
-                name: "DEAD OR ALIVE 2",
-                type: "SLOT",
-                provider: "netent",
-                rating: 4.9,
-                votes: 1100,
-                isFavorite: false,
-                demoUrl: "https://www.netent.com/games/dead-or-alive-2/"
-            },
-            {
-                id: "6", 
-                name: "GONZO'S QUEST",
-                type: "SLOT",
-                provider: "netent",
-                rating: 4.5,
-                votes: 920,
-                isFavorite: false,
-                demoUrl: "https://www.netent.com/games/gonzos-quest/"
-            },
-            // Playtech Games
-            {
-                id: "7",
-                name: "AGE OF THE GODS",
-                type: "SLOT",
-                provider: "playtech",
-                rating: 4.4,
-                votes: 680,
-                isFavorite: false,
-                demoUrl: "https://www.playtech.com/games/age-of-the-gods"
-            },
-            // Microgaming Games
-            {
-                id: "8",
-                name: "IMMORTAL ROMANCE",
-                type: "SLOT",
-                provider: "microgaming", 
-                rating: 4.3,
-                votes: 540,
-                isFavorite: false,
-                demoUrl: "https://www.microgaming.com/games/immortal-romance/"
-            }
-        ];
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>WELCOME TO XGAMING</h1>
+      <p style="font-size: 1.4rem; margin-bottom: 2rem;">The Ultimate Gaming Experience with 1000+ Games</p>
+      <button class="cta-button" onclick="scrollToGames()">🚀 EXPLORE GAMES</button>
+    </div>
+  </section>
 
-        let currentUser = null;
-        let favoriteGames = JSON.parse(localStorage.getItem('favoriteGames')) || [];
-        let currentProvider = 'all';
-        let currentSearch = '';
+  <!-- Games Section -->
+  <section class="games-section" id="games">
+    <div class="container">
+      <h2 class="section-title">🎯 FEATURED GAMES</h2>
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            loadGames();
-            updateFavorites();
-            setupSearch();
+      <!-- Providers Filter -->
+      <div class="providers-filter" id="providersFilter">
+        <button class="provider-btn active" data-prov="all">All Providers</button>
+        <button class="provider-btn" data-prov="pragmatic">Pragmatic Play</button>
+        <button class="provider-btn" data-prov="evolution">Evolution</button>
+        <button class="provider-btn" data-prov="netent">NetEnt</button>
+        <button class="provider-btn" data-prov="playtech">Playtech</button>
+        <button class="provider-btn" data-prov="microgaming">Microgaming</button>
+      </div>
+
+      <!-- Games Grid -->
+      <div class="games-grid" id="gamesGrid">
+        <!-- Games will be loaded here -->
+      </div>
+
+      <!-- simple pagination info -->
+      <div id="loader" style="text-align:center; margin-top: 2rem; color: #aaa;"></div>
+    </div>
+  </section>
+
+  <!-- Auth Modal -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-content">
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Login</button>
+        <button class="auth-tab" data-tab="register">Register</button>
+      </div>
+
+      <div class="auth-form active" id="loginForm">
+        <div class="form-group"><input type="email" placeholder="Email" id="loginEmail" /></div>
+        <div class="form-group"><input type="password" placeholder="Password" id="loginPassword" /></div>
+        <button class="auth-submit" onclick="login()">Login</button>
+      </div>
+
+      <div class="auth-form" id="registerForm">
+        <div class="form-group"><input type="text" placeholder="Full Name" id="registerName" /></div>
+        <div class="form-group"><input type="email" placeholder="Email" id="registerEmail" /></div>
+        <div class="form-group"><input type="password" placeholder="Password" id="registerPassword" /></div>
+        <button class="auth-submit" onclick="register()">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /*************************************************************************
+     * Option A Frontend file
+     * - Built-in games array used as fallback (no server required).
+     * - If you want to load from a remote API, set API_GAMES_URL to your endpoint.
+     *   Example API response expected:
+     *   {
+     *     "games": [
+     *       { "id":"1", "name":"SWEET BONANZA", "provider":"pragmatic", "type":"SLOT",
+     *         "rating":4.8, "votes":1250, "demoUrl":"https://..." }, ...
+     *     ]
+     *   }
+     *
+     * Usage:
+     * - Copy this file as index.html and open in browser.
+     * - To use your own API later, change API_GAMES_URL to your endpoint.
+     *************************************************************************/
+
+    // If you have a public API endpoint later, replace the empty string with that URL.
+    // Example: const API_GAMES_URL = "https://yourdomain.com/api/games";
+    const API_GAMES_URL = ""; // <-- leave empty to use bundled games
+
+    // Bundled games fallback (you already had some — extended a bit)
+    const bundledGames = [
+      { id: "1", name: "SWEET BONANZA", type: "SLOT", provider: "pragmatic", rating: 4.8, votes: 1250, demoUrl: "https://www.pragmaticplay.com/en/games/sweet-bonanza/" },
+      { id: "2", name: "GATES OF OLYMPUS", type: "SLOT", provider: "pragmatic", rating: 4.9, votes: 980, demoUrl: "https://www.pragmaticplay.com/en/gates-of-olympus/" },
+      { id: "3", name: "LIGHTNING ROULETTE", type: "LIVE CASINO", provider: "evolution", rating: 4.7, votes: 890, demoUrl: "https://www.evolution.com/games/lightning-roulette/" },
+      { id: "4", name: "MONOPOLY LIVE", type: "LIVE GAME SHOW", provider: "evolution", rating: 4.6, votes: 760, demoUrl: "https://www.evolution.com/games/monopoly-live/" },
+      { id: "5", name: "DEAD OR ALIVE 2", type: "SLOT", provider: "netent", rating: 4.9, votes: 1100, demoUrl: "https://www.netent.com/games/dead-or-alive-2/" },
+      { id: "6", name: "GONZO'S QUEST", type: "SLOT", provider: "netent", rating: 4.5, votes: 920, demoUrl: "https://www.netent.com/games/gonzos-quest/" },
+      { id: "7", name: "AGE OF THE GODS", type: "SLOT", provider: "playtech", rating: 4.4, votes: 680, demoUrl: "https://www.playtech.com/games/age-of-the-gods" },
+      { id: "8", name: "IMMORTAL ROMANCE", type: "SLOT", provider: "microgaming", rating: 4.3, votes: 540, demoUrl: "https://www.microgaming.com/games/immortal-romance/" },
+      // extra examples
+      { id: "9", name: "BLACKJACK CLASSIC", type: "BLACKJACK", provider: "cardmasters", rating: 4.6, votes: 410, demoUrl: "#" },
+      { id: "10", name: "EUROPEAN ROULETTE LIVE", type: "ROULETTE", provider: "livedealer", rating: 4.7, votes: 620, demoUrl: "#" }
+    ];
+
+    // App state
+    let games = []; // actual list used (either fetched or bundled)
+    let currentUser = null;
+    let favoriteGames = JSON.parse(localStorage.getItem('favoriteGames') || '[]');
+    let currentProvider = 'all';
+    let currentSearch = '';
+    const gamesGrid = document.getElementById('gamesGrid');
+    const loader = document.getElementById('loader');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initAuthTabs();
+      initProviderButtons();
+      initSearch();
+      loadFromApiOrBundle();
+    });
+
+    // Load from API if URL provided, otherwise use bundledGames
+    async function loadFromApiOrBundle() {
+      loader.textContent = 'Loading games...';
+      if (API_GAMES_URL && API_GAMES_URL.trim().length) {
+        try {
+          const res = await fetch(API_GAMES_URL, { cache: "no-cache" });
+          if (!res.ok) throw new Error('Failed to fetch');
+          const json = await res.json();
+          // Expecting json.games array; fallback to raw array if API returns array
+          games = Array.isArray(json) ? json : (Array.isArray(json.games) ? json.games : []);
+          if (!games.length) throw new Error('No games returned by API');
+          loader.textContent = '';
+          loadGames();
+        } catch (e) {
+          console.warn('API fetch failed, using bundled games.', e);
+          games = bundledGames;
+          loader.textContent = '';
+          loadGames();
+        }
+      } else {
+        // no API configured -> use bundled list
+        games = bundledGames;
+        loader.textContent = '';
+        loadGames();
+      }
+    }
+
+    // Render games with filters
+    function loadGames() {
+      gamesGrid.innerHTML = '';
+      let filtered = games.slice();
+
+      // provider filter
+      if (currentProvider !== 'all') {
+        filtered = filtered.filter(g => (g.provider || '').toLowerCase() === currentProvider.toLowerCase());
+      }
+
+      // search filter
+      if (currentSearch && currentSearch.trim().length) {
+        const q = currentSearch.toLowerCase();
+        filtered = filtered.filter(g =>
+          (g.name || '').toLowerCase().includes(q) ||
+          (g.type || '').toLowerCase().includes(q) ||
+          (g.provider || '').toLowerCase().includes(q)
+        );
+      }
+
+      if (!filtered.length) {
+        gamesGrid.innerHTML = `<div style="color:#aaa; padding:40px; text-align:center;">No games found.</div>`;
+        return;
+      }
+
+      filtered.forEach(game => {
+        const isFav = favoriteGames.includes(String(game.id));
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        card.innerHTML = `
+          <div class="game-badge">${(game.provider || 'UNKNOWN').toUpperCase()}</div>
+          <button class="favorite-btn ${isFav ? 'active' : ''}" aria-label="favorite" title="Favorite" onclick="toggleFavorite('${game.id}', event)">
+            ${isFav ? '❤️' : '🤍'}
+          </button>
+          <div class="game-image">
+            ${escapeHtml(game.name || '')}
+          </div>
+          <div class="game-info">
+            <div class="game-header">
+              <h3 class="game-title">${escapeHtml(game.name || '')}</h3>
+              <div class="game-rating">⭐ ${game.rating ?? '—'}</div>
+            </div>
+            <div class="game-meta">
+              <span>${escapeHtml(game.type || '')}</span>
+              <span>${game.votes ?? 0} votes</span>
+            </div>
+            <button class="play-button" onclick="launchGame('${game.id}')">
+              🎮 PLAY NOW
+            </button>
+          </div>
+        `;
+        // attach game data to element for easy lookup
+        card.dataset.gameId = game.id;
+        gamesGrid.appendChild(card);
+      });
+    }
+
+    // Safe HTML escape for names
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Search setup
+    function initSearch() {
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        loadGames();
+      });
+      searchBtn.addEventListener('click', () => {
+        currentSearch = searchInput.value;
+        loadGames();
+      });
+    }
+
+    // Providers filter setup
+    function initProviderButtons() {
+      const container = document.getElementById('providersFilter');
+      container.addEventListener('click', (e) => {
+        const btn = e.target.closest('.provider-btn');
+        if (!btn) return;
+        container.querySelectorAll('.provider-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const prov = btn.getAttribute('data-prov') || 'all';
+        currentProvider = prov;
+        loadGames();
+      });
+    }
+
+    // Favorites (localStorage)
+    function toggleFavorite(gameId, evt) {
+      evt && evt.stopPropagation();
+      gameId = String(gameId);
+      const idx = favoriteGames.indexOf(gameId);
+      if (idx > -1) favoriteGames.splice(idx, 1);
+      else favoriteGames.push(gameId);
+      localStorage.setItem('favoriteGames', JSON.stringify(favoriteGames));
+      loadGames();
+    }
+
+    // Launch game (open demoUrl in new window)
+    function launchGame(gameId) {
+      const g = games.find(x => String(x.id) === String(gameId));
+      if (!g) { alert('Game not found'); return; }
+      const url = g.demoUrl || g.url || '#';
+      if (!url || url === '#') {
+        alert('Demo not available for this game.');
+        return;
+      }
+      // open in new window (popup size)
+      window.open(url, '_blank', 'width=1200,height=800');
+    }
+
+    // Simple client-side auth demo (local only)
+    function initAuthTabs() {
+      document.querySelectorAll('.auth-tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+          tab.classList.add('active');
+          const tabName = tab.dataset.tab || 'login';
+          document.getElementById(tabName + 'Form').classList.add('active');
         });
+      });
+    }
 
-        // Load Games with filters
-        function loadGames() {
-            const gamesGrid = document.getElementById('gamesGrid');
-            gamesGrid.innerHTML = '';
-            
-            let filteredGames = games;
-            
-            // Provider filter
-            if (currentProvider !== 'all') {
-                filteredGames = filteredGames.filter(game => game.provider === currentProvider);
-            }
-            
-            // Search filter
-            if (currentSearch) {
-                filteredGames = filteredGames.filter(game => 
-                    game.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                    game.type.toLowerCase().includes(currentSearch.toLowerCase())
-                );
-            }
-            
-            filteredGames.forEach(game => {
-                const isFav = favoriteGames.includes(game.id);
-                const gameCard = document.createElement('div');
-                gameCard.className = 'game-card';
-                gameCard.innerHTML = `
-                    <div class="game-badge">${game.provider.toUpperCase()}</div>
-                    <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${game.id}')">
-                        ${isFav ? '❤️' : '🤍'}
-                    </button>
-                    <div class="game-image">
-                        ${game.name}
-                    </div>
-                    <div class="game-info">
-                        <div class="game-header">
-                            <h3 class="game-title">${game.name}</h3>
-                            <div class="game-rating">⭐ ${game.rating}</div>
-                        </div>
-                        <div class="game-meta">
-                            <span>${game.type}</span>
-                            <span>${game.votes} votes</span>
-                        </div>
-                        <button class="play-button" onclick="launchGame('${game.id}')">
-                            🎮 PLAY NOW
-                        </button>
-                    </div>
-                `;
-                gamesGrid.appendChild(gameCard);
-            });
-        }
+    function openAuthModal(defaultTab = 'login') {
+      document.getElementById('authModal').style.display = 'flex';
+      // switch tab
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+      const tabEl = document.querySelector(`.auth-tab[data-tab="${defaultTab}"]`) || document.querySelector('.auth-tab');
+      if (tabEl) tabEl.classList.add('active');
+      const formEl = document.getElementById(defaultTab + 'Form') || document.getElementById('loginForm');
+      if (formEl) formEl.classList.add('active');
+    }
+    function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
 
-        // Search Functionality
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const searchBtn = document.querySelector('.search-btn');
-            
-            searchInput.addEventListener('input', function() {
-                currentSearch = this.value;
-                loadGames();
-            });
-            
-            searchBtn.addEventListener('click', function() {
-                currentSearch = searchInput.value;
-                loadGames();
-            });
-        }
+    // Demo register/login store user in localStorage (NOT secure — frontend demo only)
+    function register() {
+      const name = document.getElementById('registerName').value.trim();
+      const email = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value;
+      if (!name || !email || !password) return alert('Please fill all fields.');
+      // naive storage
+      const users = JSON.parse(localStorage.getItem('xdemo_users') || '[]');
+      if (users.find(u => u.email === email)) return alert('User already exists. Please login.');
+      users.push({ name, email, password });
+      localStorage.setItem('xdemo_users', JSON.stringify(users));
+      currentUser = { name, email };
+      alert(`Welcome to XGaming, ${name}!`);
+      updateAuthUI();
+      closeAuthModal();
+    }
 
-        // Provider Filter
-        function filterByProvider(provider) {
-            currentProvider = provider;
-            document.querySelectorAll('.provider-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            loadGames();
-        }
+    function login() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      if (!email || !password) return alert('Please fill all fields.');
+      const users = JSON.parse(localStorage.getItem('xdemo_users') || '[]');
+      const user = users.find(u => u.email === email && u.password === password);
+      if (!user) return alert('Invalid credentials (demo).');
+      currentUser = { name: user.name, email: user.email };
+      alert(`Welcome back, ${user.name}!`);
+      updateAuthUI();
+      closeAuthModal();
+    }
 
-        // Favorite System
-        function toggleFavorite(gameId) {
-            const index = favoriteGames.indexOf(gameId);
-            if (index > -1) {
-                favoriteGames.splice(index, 1);
-            } else {
-                favoriteGames.push(gameId);
-            }
-            localStorage.setItem('favoriteGames', JSON.stringify(favoriteGames));
-            loadGames();
-        }
+    function updateAuthUI() {
+      const authButtons = document.getElementById('authButtons');
+      if (currentUser) {
+        authButtons.innerHTML = `<span style="color: white; margin-right: 1rem;">Welcome, ${escapeHtml(currentUser.name)}</span>
+          <button class="btn-login" onclick="logout()">Logout</button>`;
+      } else {
+        authButtons.innerHTML = `<button class="btn-login" onclick="openAuthModal('login')">Login</button>
+          <button class="btn-register" onclick="openAuthModal('register')">Register</button>`;
+      }
+    }
 
-        function updateFavorites() {
-            games.forEach(game => {
-                game.isFavorite = favoriteGames.includes(game.id);
-            });
-        }
+    function logout() {
+      currentUser = null;
+      updateAuthUI();
+      location.reload();
+    }
 
-        // Auth System
-        function openAuthModal(type) {
-            document.getElementById('authModal').style.display = 'flex';
-            switchAuthTab(type);
-        }
+    // Scroll to games
+    function scrollToGames() {
+      document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
+    }
 
-        function switchAuthTab(type) {
-            document.querySelectorAll('.auth-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.auth-form').forEach(form => {
-                form.classList.remove('active');
-            });
-            
-            event.target.classList.add('active');
-            document.getElementById(type + 'Form').classList.add('active');
-        }
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('authModal');
+      if (!modal) return;
+      if (e.target === modal) closeAuthModal();
+    });
 
-        function login() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            if (email && password) {
-                currentUser = { email, name: email.split('@')[0] };
-                alert(`Welcome back, ${currentUser.name}!`);
-                closeAuthModal();
-                updateAuthUI();
-            } else {
-                alert('Please fill in all fields');
-            }
-        }
+    // Small helper: if you want to quickly point to your API, open console and run:
+    // setApiUrl('https://your-api.example.com/games');
+    function setApiUrl(url) {
+      if (!url) return alert('Provide URL');
+      // show loader and try fetch once
+      loader.textContent = 'Switching to API...';
+      fetch(url).then(r => r.json()).then(json => {
+        // if json.games exists or array, use it
+        const arr = Array.isArray(json) ? json : (Array.isArray(json.games) ? json.games : null);
+        if (!arr) throw new Error('No games array found in response');
+        games = arr;
+        loader.textContent = '';
+        loadGames();
+        alert('API loaded successfully (client-side). Note: for CORS the API must allow your domain.');
+      }).catch(err => {
+        console.error(err);
+        loader.textContent = '';
+        alert('Failed to load API. Check console for details or ensure CORS is enabled on server.');
+      });
+    }
 
-        function register() {
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            
-            if (name && email && password) {
-                currentUser = { email, name };
-                alert(`Welcome to XGaming, ${name}!`);
-                closeAuthModal();
-                updateAuthUI();
-            } else {
-                alert('Please fill in all fields');
-            }
-        }
-
-        function closeAuthModal() {
-            document.getElementById('authModal').style.display = 'none';
-        }
-
-        function updateAuthUI() {
-            if (currentUser) {
-                document.querySelector('.auth-buttons').innerHTML = `
-                    <span style="color: white; margin-right: 1rem;">Welcome, ${currentUser.name}</span>
-                    <button class="btn-login" onclick="logout()">Logout</button>
-                `;
-            }
-        }
-
-        function logout() {
-            currentUser = null;
-            updateAuthUI();
-            location.reload();
-        }
-
-        // Game Launch
-        function launchGame(gameId) {
-            const game = games.find(g => g.id === gameId);
-            if (game) {
-                window.open(game.demoUrl, '_blank', 'width=1200,height=800');
-                alert(`🚀 Launching ${game.name}...\nEnjoy your game!`);
-            }
-        }
-
-        // Scroll to Games
-        function scrollToGames() {
-            document.getElementById('games').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('authModal');
-            if (event.target === modal) {
-                closeAuthModal();
-            }
-        }
-    </script>
+  </script>
 </body>
 </html>
